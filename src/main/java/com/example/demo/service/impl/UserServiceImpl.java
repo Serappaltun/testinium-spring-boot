@@ -16,7 +16,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(User user) {
         log.info("save user: {}", user.getName());
-        userRepository.save(user);
+        try {
+            userRepository.save(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error(e.getMessage());
+        }
+        finally {
+            log.info("try to save user: {}", user.getName());
+        }
     }
 
     @Override
